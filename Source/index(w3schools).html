@@ -1,24 +1,34 @@
 <!doctype html>
 <html>
+  <!-- Head is for elements that aren't visible-->
   <head>
-    <link rel="stylesheet" href="csstest.css">
+    <title>To-Do List</title>
+    
+    <!-- Load free google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Finlandica&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="design.css">
     <script>
-            // Create a "close" button and append it to each list item
+      // Create a "close" button and append it to each list item
       var myNodelist = document.getElementsByTagName("LI");
       var i;
       for (i = 0; i < myNodelist.length; i++) {
         var span = document.createElement("SPAN");
         var txt = document.createTextNode("\u00D7");
-        span.className = "close";
+        span.className = "closeElement";
         span.appendChild(txt);
         myNodelist[i].appendChild(span);
       }
 
-      // Click on a close button to hide the current list item
-      var close = document.getElementsByClassName("close");
+      // Click on close button
+      var closeElements = document.getElementsByClassName("closeElement");
       var i;
-      for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
+      // Cycle through all close elements
+      for (i = 0; i < closeElements.length; i++) {
+        //If close[i] is clicked, hide / set display to none
+        closeElements[i].onclick = function() {
           var div = this.parentElement;
           div.style.display = "none";
         }
@@ -35,24 +45,25 @@
       // Create a new list item when clicking on the "Add" button
       function newElement() {
         var li = document.createElement("li");
-        var inputValue = document.getElementById("myInput").value;
+        var inputValue = document.getElementById("inputBar").value;
         var t = document.createTextNode(inputValue);
         li.appendChild(t);
         if (inputValue === '') {
-          alert("You must write something!");
+          //Displays alert box to screen
+          alert("Can't be empty there are things to be done");
         } else {
-          document.getElementById("myUL").appendChild(li);
+          document.getElementById("todoItemList").appendChild(li);
         }
-        document.getElementById("myInput").value = "";
+        document.getElementById("inputBar").value = "";
 
         var span = document.createElement("SPAN");
         var txt = document.createTextNode("\u00D7");
-        span.className = "close";
+        span.className = "closeElement";
         span.appendChild(txt);
         li.appendChild(span);
 
-        for (i = 0; i < close.length; i++) {
-          close[i].onclick = function() {
+        for (i = 0; i < closeElements.length; i++) {
+          closeElements[i].onclick = function() {
             var div = this.parentElement;
             div.style.display = "none";
           }
@@ -60,14 +71,16 @@
       }
     </script>
   </head>
+
+  <!-- Body is for elements that are visible on webpage-->
   <body>
     <div id="myDIV" class="header">
-      <h2>To Do List</h2>
-      <input type="text" id="myInput" placeholder="Title...">
-      <span onclick="newElement()" class="addBtn">Add</span>
+      <h1>To-Do List</h1>
+      <input type="text" id="inputBar" placeholder="Please enter list item">
+      <span></span>
+      <span onclick="newElement()" class="add-todo-button">+</span>
     </div>
     
-    <ul id="myUL">
-    </ul>
+    <ul id="todoItemList"></ul>
   </body>
 </html>
