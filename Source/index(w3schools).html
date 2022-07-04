@@ -10,66 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Finlandica&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="design.css">
-    <script>
-      // Create a "close" button and append it to each list item
-      var myNodelist = document.getElementsByTagName("LI");
-      var i;
-      for (i = 0; i < myNodelist.length; i++) {
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
-        span.className = "closeElement";
-        span.appendChild(txt);
-        myNodelist[i].appendChild(span);
-      }
-
-      // Click on close button
-      var closeElements = document.getElementsByClassName("closeElement");
-      var i;
-      // Cycle through all close elements
-      for (i = 0; i < closeElements.length; i++) {
-        //If close[i] is clicked, hide / set display to none
-        closeElements[i].onclick = function() {
-          var div = this.parentElement;
-          div.style.display = "none";
-        }
-      }
-
-      // Add a "checked" symbol when clicking on a list item
-      var list = document.querySelector('ul');
-      list.addEventListener('click', function(ev) {
-        if (ev.target.tagName === 'LI') {
-          ev.target.classList.toggle('checked');
-        }
-      }, false);
-
-      // Create a new list item when clicking on the "Add" button
-      function newElement() {
-        var li = document.createElement("li");
-        var inputValue = document.getElementById("inputBar").value;
-        var t = document.createTextNode(inputValue);
-        li.appendChild(t);
-        if (inputValue === '') {
-          //Displays alert box to screen
-          alert("Can't be empty there are things to be done");
-        } else {
-          document.getElementById("todoItemList").appendChild(li);
-        }
-        document.getElementById("inputBar").value = "";
-
-        var span = document.createElement("SPAN");
-        var txt = document.createTextNode("\u00D7");
-        span.className = "closeElement";
-        span.appendChild(txt);
-        li.appendChild(span);
-
-        for (i = 0; i < closeElements.length; i++) {
-          closeElements[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-          }
-        }
-      }
-    </script>
   </head>
 
   <!-- Body is for elements that are visible on webpage-->
@@ -82,5 +22,20 @@
     </div>
     
     <ul id="todoItemList"></ul>
+    <script type="application/javascript" src="Main.js"></script>
+    <script type="text/javascript">
+      function loadPersistedItems(){
+        //Get all items in storage
+        // append items to todoItemList
+        var i;
+        // Provide empty default array if savedItems is null
+        var savedList = JSON.parse(localStorage.getItem("savedItems") || ("[]"));
+        var itemArray = document.getElementById("todoItemList");
+        for(i = 0; i < savedList.length; i++){
+          itemArray.push(savedList[i]);
+        }
+      }
+      window.onload = loadPersistedItems();
+    </script>
   </body>
 </html>

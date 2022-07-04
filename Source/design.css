@@ -3,13 +3,13 @@
     font-family: Finlandica;
   }
   
-  /* Unordered List style */
+  /* Unordered List*/
   ul {
     margin: 0;
     padding: 0;
   }
   
-  /* Style the list items */
+  /* List items */
   ul li {
     cursor: pointer;
     position: relative;
@@ -18,7 +18,7 @@
     font-size: 18px;
     transition: 0.2s;
   
-    /* make the list items unselectable */
+    /* Make items unselectable */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -61,8 +61,7 @@
     padding: 30px 40px;
     color: rgb(214, 214, 214);
     text-align: center;
-  }
-  
+  }  
   /* Clear floats after the header */
   .header:after {
     content: "";
@@ -75,7 +74,7 @@
     margin-left: 15px;
   }
   
-  /* Input bar style*/
+  /* Input bar*/
   input {
     margin: 0;
     border: none;
@@ -86,7 +85,7 @@
     font-size: 16px;
   }
 
-  /* Add Item Button style*/
+  /* Add Item Button*/
   .add-todo-button {
     padding: 10px;
     width: 15%;
@@ -110,7 +109,7 @@
     opacity: 0.8;
   }
 
-  /* Close Button style*/
+  /* Close Button*/
   .closeElement {
     position: absolute;
     right: 0;
