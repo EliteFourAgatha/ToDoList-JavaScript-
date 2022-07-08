@@ -1,3 +1,50 @@
+function setTodaysDate(){
+    const today = '' + new Date() + ''
+    var todaysDate = document.getElementById("todo-date").textContent = today;
+}
+setInterval(setTodaysDate, 1000); //Call function every second
+
+const text = document.getElementById("text");
+const addTodoButton = document.getElementById("add-todo-button");
+const listBox = document.getElementById("listBox");
+const saveIndex = document.getElementById("saveIndex");
+
+let todoArray = [];
+
+addTodoButton.addEventListener("click", (e)=>{
+    e.preventDefault(); //If event not explicitly handled, deny default action
+    let todo = localStorage.getItem("todo");
+    if(todo === null) {
+        todoArray = [];
+    } else {
+        todoArray = JSON.parse(todo);
+    }
+    todoArray.push(text.value);
+    text.value = "";
+    //Store array to localStorage on every change (task added, removed, etc.)
+    localStorage.setItem("todo", JSON.stringify(todoArray));
+    displayTodo();
+})
+
+
+function displayTodo() {
+    let todo = localStorage.getItem("todo");
+    if(todo === null) {
+        todoArray = [];
+    } else {
+        todoArray = JSON.parse(todo);
+    }
+    let htmlCode = "";
+    todoArray.foreach((list, ind) => {
+        htmlCode += 
+        `<div>
+            <span>${list}</span>
+        </div>`
+    });
+}
+
+
+
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 // Append close button to each list item
@@ -63,7 +110,4 @@ function newElement() {
         div.style.display = "none";
         }
     }
-
-    var list = document.getElementById('todoItemList');
-    localStorage.setItem("savedItems", JSON.stringify(list));
 }

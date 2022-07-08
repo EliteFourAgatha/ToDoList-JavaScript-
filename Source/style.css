@@ -1,6 +1,13 @@
 * {
     box-sizing: border-box;
     font-family: Finlandica;
+    background-color: rgb(123, 123, 123);
+  }
+  h1, h2, span, :not(.closeElement){
+    background-color: black;
+  }    
+  body{
+    margin: 0px; /*Remove padding around side*/
   }
   
   /* Unordered List*/
@@ -14,7 +21,7 @@
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 40px;
-    background: rgb(178, 178, 178);
+    background: rgb(130, 130, 130);
     font-size: 18px;
     transition: 0.2s;
   
@@ -27,12 +34,15 @@
   
   /* Set all odd list items to a different color (zebra-stripes) */
   ul li:nth-child(odd) {
-    background: #ffe4e4;
+    background: #006e1d;
+  }
+  ul li:nth-child(even) {
+    background:rgb(67, 67, 67);
   }
   
   /* Darker background-color on hover */
   ul li:hover {
-    background: rgb(221, 175, 175);
+    background: #871008;
   }
   
   /* When clicked on, add a background color and strike out text */
@@ -46,7 +56,7 @@
   ul li.checked::before {
     content: '';
     position: absolute;
-    border-color: #fff;
+    border-color: rgb(255, 255, 255);
     border-style: solid;
     border-width: 0 2px 2px 0;
     top: 10px;
@@ -56,13 +66,14 @@
     width: 7px;
   }
 
+
   .header {
-    background-color: #085014;
+    background-color: #000000;
     padding: 30px 40px;
-    color: rgb(214, 214, 214);
+    color: rgb(221, 255, 222);
     text-align: center;
   }  
-  /* Clear floats after the header */
+  /* Clear floats after the header*/
   .header:after {
     content: "";
     display: table;
@@ -70,6 +81,7 @@
   }
 
   /* Every span proceeded by a span (Every span except first) will have margin*/
+  /* used to put space between input bar & add button */
   span + span{
     margin-left: 15px;
   }
@@ -83,13 +95,14 @@
     padding: 10px;
     float: left;
     font-size: 16px;
+    color:#fff;
   }
 
   /* Add Item Button*/
   .add-todo-button {
     padding: 10px;
     width: 15%;
-    background: #aeaeae;
+    background: #353535;
     color: rgb(67, 67, 67);
     float: left;
     text-align: center;
@@ -118,6 +131,7 @@
     /* Transition smoothly over time */
     transition: opacity 0.2s;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+    background-color: #871008;
   }
   /* While hovered over...*/
   .closeElement:hover {
