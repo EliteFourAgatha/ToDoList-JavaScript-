@@ -3,7 +3,7 @@
   <!-- Head is for elements that aren't visible-->
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Todo List</title>
    
     <!-- Load free google font-->
@@ -21,26 +21,18 @@
         <h1>To-Do List</h1>
         <h3 id="todo-date">test</h3>
         <input type="text" id="inputBar" placeholder="Please enter to-do item">
-        <span></span>
-        <span onclick="newElement()" class="add-todo-button">+</span>
+        <button id="add-todo-button", class="add-todo-button">+</button>
+        <button id="clear-todos-button", class="clear-todos-button">Clear</button>
       </div>
-      <div></div>
-        <div id="items-div" class="div-list-items">
-          <ul id="todoItemList"></ul>
-          <script type="application/javascript" src="Main.js"></script>
-          <script type="text/javascript">
-            function loadPersistedItems(){
-              //Get all items in storage
-              // append items to todoItemList
-              var i;
-              // Provide empty default array if savedItems is null
-              var savedList = JSON.parse(localStorage.getItem("savedItems") || ("[]"));
-              var itemArray = document.getElementById("todoItemList");
-              for(i = 0; i < savedList.length; i++){
-                itemArray.push(savedList[i]);
-              }
-            }
-          </script>
+      <div class="row">
+        <div class="column">
+          <div id="listBox" class="todos-box" style="display:inline-block"></div>
+        </div>
+        <div class="column">
+          <h2 id="finished-todos-h2">Completed</h2>
+          <div id="finishedTodosBox" class="finished-todos-box"></div>
+        </div>
+        <script type="application/javascript" src="Main.js"></script>
       </div>
     </nav>
 

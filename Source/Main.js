@@ -4,12 +4,15 @@ function setTodaysDate(){
 }
 setInterval(setTodaysDate, 1000); //Call function every second
 
-const text = document.getElementById("text");
+const textInput = document.getElementById("inputBar");
 const addTodoButton = document.getElementById("add-todo-button");
+const clearTodosButton = document.getElementById("clear-todos-button");
 const listBox = document.getElementById("listBox");
+const finishedTodosBox = document.getElementById("finishedTodosBox");
 const saveIndex = document.getElementById("saveIndex");
 
 let todoArray = [];
+let finishedTodos = [];
 
 addTodoButton.addEventListener("click", (e)=>{
     e.preventDefault(); //If event not explicitly handled, deny default action
@@ -19,13 +22,30 @@ addTodoButton.addEventListener("click", (e)=>{
     } else {
         todoArray = JSON.parse(todo);
     }
-    todoArray.push(text.value);
-    text.value = "";
+    let input = textInput.value.trim();
+    if (input === '') {
+        //Displays alert box to screen
+        alert("Can't be empty there are things to be done");
+    } else {
+        //Add created item to list
+        todoArray.push(input);
+    }
+
+    //Reset input bar
+    textInput.value = "";
     //Store array to localStorage on every change (task added, removed, etc.)
     localStorage.setItem("todo", JSON.stringify(todoArray));
     displayTodo();
+    displayFinishedTodos();
 })
 
+textInput.addEventListener("keyup", function(event){
+    if(event.key === "Enter"){
+        event.preventDefault();
+        addTodoButton.click();
+    }
+
+})
 
 function displayTodo() {
     let todo = localStorage.getItem("todo");
@@ -35,79 +55,43 @@ function displayTodo() {
         todoArray = JSON.parse(todo);
     }
     let htmlCode = "";
-    todoArray.foreach((list, ind) => {
+    todoArray.forEach((list, index) => {
         htmlCode += 
         `<div>
-            <span>${list}</span>
-        </div>`
+            <h2 class="todo-item-span" style="display:inline-block">${list}</h2>
+            <button class="delete-button" onclick='deleteTodo(${index})' style="display:inline-block">Delete</button>
+        </div>`;
     });
+    listBox.innerHTML = htmlCode;
 }
 
-
-
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-// Append close button to each list item
-for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-
-    span.className = "closeElement";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-    localStorage.setItem("List"+ myNodelist[i], (myNodelist[i].value))
+function deleteTodo(index){
+    let todo = localStorage.getItem("todo");
+    todoArray = JSON.parse(todo);
+    //Delete (N) array elements at (index)
+    let testIndex = todoArray.splice(index, 1);
+    console.log(testIndex);
+    finishedTodos.push(testIndex);
+    //Store array to localStorage on every change (task added, removed, etc.)
+    localStorage.setItem("todo", JSON.stringify(todoArray));
+    displayTodo();
+    displayFinishedTodos();
 }
 
-// Click on close button
-var closeElements = document.getElementsByClassName("closeElement");
-var i;
-// Cycle through all close elements
-for (i = 0; i < closeElements.length; i++) {
-    //If close[i] is clicked, hide / set display to none
-    closeElements[i].onclick = function() {
-        var div = this.parentElement;
-        div.style.display = "none";
-    }
-}
+clearTodosButton.addEventListener("click", (e)=>{
+    e.preventDefault(); //If event not explicitly handled, deny default action
+    finishedTodos.length = 0;
+    displayFinishedTodos();
+})
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-    if (ev.target.tagName === 'LI') {
-        ev.target.classList.toggle('checked');
-    }
-}, false);
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-    var li = document.createElement("li");
-    //Get input value
-    // trim() whitespace from before/after text
-    var inputValue = document.getElementById("inputBar").value.trim();
-    var t = document.createTextNode(inputValue);
-
-    //Append value to list item
-    li.appendChild(t);
-    if (inputValue === '') {
-        //Displays alert box to screen
-        alert("Can't be empty there are things to be done");
-    } else {
-        //Add created item to list
-        document.getElementById("todoItemList").appendChild(li);
-    }
-    //Reset input bar
-    document.getElementById("inputBar").value = "";
-
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "closeElement";
-    span.appendChild(txt);
-    li.appendChild(span);
-
-    for (i = 0; i < closeElements.length; i++) {
-        closeElements[i].onclick = function() {
-        var div = this.parentElement;
-        div.style.display = "none";
-        }
-    }
+function displayFinishedTodos(){
+    let htmlCode = "";
+    finishedTodos.forEach((list) => {
+        htmlCode += 
+        `<div>
+            <span>                       </span>
+            <h2 class="finished-todo-span">${list}</h2>
+        </div>`;
+    });
+    finishedTodosBox.innerHTML = htmlCode;
 }

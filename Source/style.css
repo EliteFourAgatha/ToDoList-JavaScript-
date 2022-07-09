@@ -4,68 +4,12 @@
     background-color: rgb(123, 123, 123);
   }
   h1, h2, span, :not(.closeElement){
-    background-color: black;
-  }    
+    background-color: rgb(0, 0, 0);
+    color: white;
+  }
   body{
     margin: 0px; /*Remove padding around side*/
   }
-  
-  /* Unordered List*/
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* List items */
-  ul li {
-    cursor: pointer;
-    position: relative;
-    padding: 12px 8px 12px 40px;
-    background: rgb(130, 130, 130);
-    font-size: 18px;
-    transition: 0.2s;
-  
-    /* Make items unselectable */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Set all odd list items to a different color (zebra-stripes) */
-  ul li:nth-child(odd) {
-    background: #006e1d;
-  }
-  ul li:nth-child(even) {
-    background:rgb(67, 67, 67);
-  }
-  
-  /* Darker background-color on hover */
-  ul li:hover {
-    background: #871008;
-  }
-  
-  /* When clicked on, add a background color and strike out text */
-  ul li.checked {
-    background: #888;
-    color: #fff;
-    text-decoration: line-through;
-  }
-  
-  /* Add a "checked" mark when clicked on */
-  ul li.checked::before {
-    content: '';
-    position: absolute;
-    border-color: rgb(255, 255, 255);
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 10px;
-    left: 16px;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-  }
-
 
   .header {
     background-color: #000000;
@@ -80,10 +24,23 @@
     clear: both;
   }
 
-  /* Every span proceeded by a span (Every span except first) will have margin*/
-  /* used to put space between input bar & add button */
-  span + span{
+  /* Put space between input bar & add button */
+  input + button{
     margin-left: 15px;
+  }
+  button + button{
+    margin-left: 15px;
+  }
+
+  .todo-item-span{
+    margin: 25px;
+  }
+  .finished-todo-span{
+    margin: 0px;
+  }
+  .column{
+    float: left;
+    width: 50%;
   }
   
   /* Input bar*/
@@ -91,7 +48,7 @@
     margin: 0;
     border: none;
     border-radius: 0;
-    width: 70%;
+    width: 50%;
     padding: 10px;
     float: left;
     font-size: 16px;
@@ -99,11 +56,11 @@
   }
 
   /* Add Item Button*/
-  .add-todo-button {
+  .add-todo-button, .clear-todos-button {
     padding: 10px;
     width: 15%;
     background: #353535;
-    color: rgb(67, 67, 67);
+    color: rgb(255, 255, 255);
     float: left;
     text-align: center;
     font-size: 16px;
@@ -114,17 +71,16 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
   }
   /* While hovered over...*/
-  .add-todo-button:hover {
+  .add-todo-button:hover, .clear-todos-button:hover {
     background-color: rgb(127, 127, 127);
   }
   /* When clicked on...*/
-  .add-todo-button:active {
+  .add-todo-button:active, .clear-todos-button:hover {
     opacity: 0.8;
   }
 
-  /* Close Button*/
-  .closeElement {
-    position: absolute;
+  /* Delete Button*/
+  .delete-button {
     right: 0;
     top: 0;
     padding: 12px 16px 12px 16px;
@@ -134,11 +90,11 @@
     background-color: #871008;
   }
   /* While hovered over...*/
-  .closeElement:hover {
+  .delete-button:hover {
     background-color: #a9160b;
     color: white;
   }
   /* When clicked on...*/
-  .closeElement:active {
+  .delete-button:active {
     opacity: 0.8;
   }
